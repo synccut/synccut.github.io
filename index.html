@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SyncCut Studio — Auto-sync & silence cutter for YouTube creators</title>
+  <meta name="description" content="SyncCut Studio automatically syncs your iPhone video with your Shure microphone audio and cuts all silences — so you can ship videos faster." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0f;
+      --surface: #16161a;
+      --border: #2a2a30;
+      --accent: #6c63ff;
+      --accent-hover: #857dff;
+      --text: #e8e8f0;
+      --muted: #8888a0;
+      --green: #22c55e;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,15,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .logo { font-size: 1rem; font-weight: 700; letter-spacing: -0.3px; }
+    .logo span { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    /* HERO */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.35);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 22px;
+    }
+    h1 em { color: var(--accent); font-style: normal; }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .price-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .price-note strong { color: var(--text); }
+
+    /* SCREENSHOT PLACEHOLDER */
+    .screenshot-wrap {
+      max-width: 900px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+    .screenshot-box {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--surface);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    /* Replace the .screenshot-box with an actual screenshot image when you have one:
+       <img src="screenshot.png" alt="SyncCut Studio interface" style="width:100%;border-radius:16px;" /> */
+
+    /* SOCIAL PROOF */
+    .proof {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* SECTION */
+    section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    /* PROBLEM */
+    .problem-list {
+      list-style: none;
+      display: grid;
+      gap: 16px;
+    }
+    .problem-list li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 0.97rem;
+    }
+    .problem-list li .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* FEATURES GRID */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .feature-card .icon { font-size: 1.6rem; margin-bottom: 14px; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+    /* HOW IT WORKS */
+    .steps { display: grid; gap: 0; }
+    .step {
+      display: flex;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.3);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .step-content p { font-size: 0.92rem; color: var(--muted); }
+
+    /* REQUIREMENTS */
+    .req-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .req-list li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .req-list li::before { content: "✓"; color: var(--green); font-weight: 700; }
+
+    /* PRICING */
+    .pricing-card {
+      max-width: 460px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+    .pricing-card .price {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin: 16px 0 4px;
+    }
+    .pricing-card .price sup { font-size: 1.5rem; vertical-align: super; letter-spacing: 0; }
+    .pricing-card .price-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 28px; }
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+      display: grid;
+      gap: 10px;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+    .pricing-features li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* PAYPAL BUTTON AREA */
+    .paypal-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .paypal-secure {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* FAQ */
+    .faq-list { display: grid; gap: 16px; }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
+    .faq-item h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 8px; }
+    .faq-item p { font-size: 0.9rem; color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .hero { padding: 60px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SyncCut<span>Studio</span></div>
+  <a href="#pricing" class="nav-cta">Get it — $19</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">macOS App for YouTube Creators</div>
+  <h1>Stop wasting hours<br>on <em>manual editing</em></h1>
+  <p class="subtitle">
+    SyncCut Studio automatically syncs your iPhone footage with your Shure mic audio,
+    then cuts every silence — so your video is ready in minutes, not hours.
+  </p>
+  <div class="hero-cta-group">
+    <a href="#pricing" class="btn-primary">Get SyncCut Studio — $19</a>
+    <span class="price-note"><strong>One-time payment.</strong> No subscription. No cloud. Works 100% offline.</span>
+  </div>
+</div>
+
+<!-- SCREENSHOT -->
+<div class="screenshot-wrap">
+  <div class="screenshot-box">
+    <!-- Replace this div with: <img src="screenshot.png" alt="SyncCut Studio" style="width:100%;display:block;" /> -->
+    App screenshot — add screenshot.png to this folder
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section>
+  <div class="section-label">The problem</div>
+  <h2>You record great content.<br>Post-production kills your momentum.</h2>
+  <p class="section-sub">Every creator who records on iPhone + external mic knows the pain:</p>
+  <ul class="problem-list">
+    <li><span class="icon">😤</span><div>Manually syncing the video with a separate audio file takes forever and is error-prone.</div></li>
+    <li><span class="icon">✂️</span><div>Scrubbing through footage to cut every pause and silence is tedious, repetitive work.</div></li>
+    <li><span class="icon">☁️</span><div>Cloud-based tools mean uploading gigabytes of footage — slow, and your raw files leave your machine.</div></li>
+  </ul>
+</section>
+
+<!-- FEATURES -->
+<section style="padding-top:0;">
+  <div class="section-label">What it does</div>
+  <h2>Everything automated.<br>Nothing uploaded.</h2>
+  <p class="section-sub">All processing happens locally on your Mac. No subscription, no internet required.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="icon">🎯</div>
+      <h3>Auto Sync</h3>
+      <p>Cross-correlation algorithm finds the exact offset between your iPhone video and Shure audio — no manual clapping needed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔇</div>
+      <h3>Silence Detection</h3>
+      <p>Detects and removes all pauses automatically. Adjustable threshold, min duration, and padding so you stay in control.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">👁</div>
+      <h3>Visual Timeline</h3>
+      <p>See exactly what will be kept (green) and cut (red). Toggle any segment on/off with a single Shift+Click.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">▶️</div>
+      <h3>Live Preview</h3>
+      <p>Preview the edited video with silences skipped in real-time — before you commit to a full export.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🎚</div>
+      <h3>Audio Normalization</h3>
+      <p>Shure audio is normalized to −14 LUFS (YouTube standard) automatically on every export.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">⚡️</div>
+      <h3>Fast Export</h3>
+      <p>Default "Copy" mode skips re-encoding — your original 1080p iPhone quality is preserved at maximum speed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="padding-top:0;">
+  <div class="section-label">How it works</div>
+  <h2>From raw files to<br>clean video in 5 steps</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Drop your files</h3>
+        <p>Drag-and-drop your iPhone .MOV and Shure .WAV onto the app. Waveforms appear instantly.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Auto Sync</h3>
+        <p>Click "Auto Sync" — the app finds the timing offset between the two tracks. Fine-tune with the slider if needed.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Detect Silence</h3>
+        <p>Click "Detect Silence" to mark all pauses on the timeline. Adjust threshold to taste.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Preview</h3>
+        <p>Watch the result with silences skipped live. Toggle individual segments if something looks off.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Export</h3>
+        <p>Hit export. Get a clean MP4 with synced Shure audio, all silences removed, normalized to YouTube spec.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section style="padding-top:0;">
+  <div class="section-label">Requirements</div>
+  <h2>What you need</h2>
+  <ul class="req-list">
+    <li>macOS 12 Monterey or later</li>
+    <li>Python 3.11+</li>
+    <li>FFmpeg (free, via Homebrew)</li>
+    <li>iPhone video (.MOV)</li>
+    <li>Shure microphone audio (.WAV)</li>
+  </ul>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="padding-top:0;">
+  <div class="section-label">Pricing</div>
+  <h2 style="text-align:center;margin-bottom:40px;">Simple, one-time price</h2>
+  <div class="pricing-card">
+    <div>macOS App — Lifetime License</div>
+    <div class="price"><sup>$</sup>19</div>
+    <div class="price-desc">One-time payment. No subscription ever.</div>
+    <ul class="pricing-features">
+      <li>Full macOS desktop app (.app)</li>
+      <li>Auto sync iPhone + Shure mic</li>
+      <li>Automatic silence detection & cutting</li>
+      <li>Visual timeline editor</li>
+      <li>Live preview before export</li>
+      <li>Audio normalization to −14 LUFS</li>
+      <li>Works 100% offline — no cloud</li>
+      <li>All future updates included</li>
+    </ul>
+
+    <!-- =====================================================
+         PAYPAL BUTTON — Replace the placeholder below.
+         Steps:
+         1. Log in to paypal.com/buttons
+         2. Create a "Buy Now" button for $19 USD
+         3. Paste the generated <form> code here
+         ===================================================== -->
+    <div class="paypal-wrap">
+      <!-- PASTE YOUR PAYPAL BUTTON CODE HERE -->
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL@example.com">
+        <input type="hidden" name="item_name" value="SyncCut Studio — Lifetime License">
+        <input type="hidden" name="amount" value="19.00">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="no_shipping" value="1">
+        <input type="submit" value="Buy Now — $19" style="
+          background: #0070ba;
+          color: #fff;
+          border: none;
+          padding: 16px 40px;
+          border-radius: 10px;
+          font-size: 1.05rem;
+          font-weight: 700;
+          cursor: pointer;
+          width: 100%;
+          transition: background 0.2s;
+        " onmouseover="this.style.background='#005ea6'" onmouseout="this.style.background='#0070ba'">
+      </form>
+      <!-- END PAYPAL BUTTON -->
+      <span class="paypal-secure">🔒 Secure checkout via PayPal</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding-top:0;">
+  <div class="section-label">FAQ</div>
+  <h2>Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <h3>Does it work with any mic, or only Shure?</h3>
+      <p>It works with any external audio file (.WAV or similar). It was built and tested with Shure mics, so the defaults are tuned for that setup.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does my footage leave my computer?</h3>
+      <p>Never. SyncCut Studio runs 100% locally. No uploads, no accounts, no servers.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What happens if Auto Sync returns a wrong offset?</h3>
+      <p>There's a ±5000 ms fine-tune slider so you can correct it manually before preview and export.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What format does it export?</h3>
+      <p>MP4 by default (H.264 or H.265). "Copy mode" skips re-encoding to preserve original quality at maximum speed. MOV is also supported.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is this a subscription?</h3>
+      <p>No. $19 once, yours forever. All future updates are included.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What do I get after purchase?</h3>
+      <p>You'll receive a download link with the .app file and setup instructions via email through PayPal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section style="text-align:center; padding-bottom:60px;">
+  <h2 style="margin-bottom:16px;">Ready to edit faster?</h2>
+  <p style="color:var(--muted);margin-bottom:32px;">Join YouTube creators who ship videos without the manual grind.</p>
+  <a href="#pricing" class="btn-primary">Get SyncCut Studio — $19</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 SyncCut Studio. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
