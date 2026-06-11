@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SyncCut Studio — Auto-sync & silence cutter for YouTube creators</title>
-  <meta name="description" content="SyncCut Studio automatically syncs your iPhone video with your Shure microphone audio and cuts all silences — so you can ship videos faster." />
+  <title>SyncCut Studio — Sync audio & cut silences automatically. No video editor needed.</title>
+  <meta name="description" content="SyncCut Studio syncs your camera footage with your external mic audio and removes every silence automatically — no Premiere, no CapCut, no subscription." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -17,6 +17,7 @@
       --text: #e8e8f0;
       --muted: #8888a0;
       --green: #22c55e;
+      --red: #f87171;
     }
 
     body {
@@ -85,7 +86,7 @@
     .subtitle {
       font-size: 1.15rem;
       color: var(--muted);
-      max-width: 560px;
+      max-width: 580px;
       margin: 0 auto 40px;
     }
     .hero-cta-group {
@@ -111,7 +112,7 @@
     }
     .price-note strong { color: var(--text); }
 
-    /* SCREENSHOT PLACEHOLDER */
+    /* VIDEO */
     .screenshot-wrap {
       max-width: 900px;
       margin: 0 auto 80px;
@@ -128,19 +129,6 @@
       justify-content: center;
       color: var(--muted);
       font-size: 0.9rem;
-    }
-    /* Replace the .screenshot-box with an actual screenshot image when you have one:
-       <img src="screenshot.png" alt="SyncCut Studio interface" style="width:100%;border-radius:16px;" /> */
-
-    /* SOCIAL PROOF */
-    .proof {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 24px;
-      text-align: center;
-      font-size: 0.875rem;
-      color: var(--muted);
     }
 
     /* SECTION */
@@ -230,6 +218,73 @@
     .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
     .step-content p { font-size: 0.92rem; color: var(--muted); }
 
+    /* FOR WHO / NOT FOR WHO */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .audience-grid { grid-template-columns: 1fr; } }
+    .audience-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .audience-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .audience-card ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .audience-card ul li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .audience-card ul li::before {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .for-list li::before { content: "✓"; color: var(--green); font-weight: 700; }
+    .not-for-list li::before { content: "✗"; color: var(--red); font-weight: 700; }
+
+    /* TRUST / CREATOR */
+    .trust-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 14px;
+      padding: 32px;
+      max-width: 640px;
+    }
+    .trust-card p { font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .trust-card .author { font-size: 0.875rem; color: var(--text); font-weight: 600; }
+
+    /* GUARANTEE */
+    .guarantee-card {
+      background: rgba(34,197,94,0.05);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 14px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 640px;
+    }
+    .guarantee-card .g-icon { font-size: 2rem; flex-shrink: 0; }
+    .guarantee-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--green); }
+    .guarantee-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
     /* REQUIREMENTS */
     .req-list {
       list-style: none;
@@ -287,7 +342,7 @@
       flex-shrink: 0;
     }
 
-    /* PAYPAL BUTTON AREA */
+    /* PAYPAL */
     .paypal-wrap {
       display: flex;
       flex-direction: column;
@@ -341,15 +396,17 @@
   <div class="badge">Auto-sync + Silence Cutter · macOS App</div>
   <h1>Sync your audio.<br>Cut every silence.<br><em>No editor needed.</em></h1>
   <p class="subtitle">
-    SyncCut Studio automatically syncs your iPhone footage with your Shure mic <strong style="color:var(--text)">and removes every silence</strong> — no Premiere, no CapCut, no plugins. Just a clean, export-ready video.
+    SyncCut Studio takes your camera footage and external mic audio,
+    <strong style="color:var(--text)">syncs them automatically and removes every silence</strong> —
+    no Premiere, no CapCut, no subscription. Just a clean, export-ready video.
   </p>
   <div class="hero-cta-group">
-    <a href="#pricing" class="btn-primary">Get SyncCut Studio — $19</a>
-    <span class="price-note"><strong>One-time payment.</strong> No subscription. No cloud. Works 100% offline.</span>
+    <a href="#pricing" class="btn-primary">Get SyncCut Studio — Save Hours Editing</a>
+    <span class="price-note"><strong>One-time payment of $19.</strong> No subscription. No cloud. 100% offline.</span>
   </div>
 </div>
 
-<!-- SCREENSHOT -->
+<!-- VIDEO -->
 <div class="screenshot-wrap">
   <div class="screenshot-box" style="background:none;border:none;aspect-ratio:16/9;padding:0;">
     <iframe
@@ -365,12 +422,12 @@
 <section>
   <div class="section-label">The problem</div>
   <h2>You record great content.<br>Post-production kills your momentum.</h2>
-  <p class="section-sub">Every creator who records on iPhone + external mic knows the pain:</p>
+  <p class="section-sub">Every creator who records video and audio separately knows this pain:</p>
   <ul class="problem-list">
-    <li><span class="icon">😤</span><div>Manually syncing the video with a separate audio file in Premiere or CapCut takes forever and is error-prone.</div></li>
-    <li><span class="icon">✂️</span><div>Scrubbing through footage to cut every pause and silence inside a heavy editor is tedious, repetitive work.</div></li>
-    <li><span class="icon">☁️</span><div>Cloud-based tools mean uploading gigabytes of footage — slow, and your raw files leave your machine.</div></li>
-    <li><span class="icon">🤯</span><div>You shouldn't need to open Premiere, CapCut, or DaVinci just to sync audio and remove silence.</div></li>
+    <li><span class="icon">😤</span><div>Manually syncing your camera footage with a separate audio file takes forever and is error-prone.</div></li>
+    <li><span class="icon">✂️</span><div>Scrubbing through every pause and silence inside a heavy editor is tedious, repetitive work.</div></li>
+    <li><span class="icon">🤯</span><div>You shouldn't need to open Premiere, CapCut, or DaVinci just to sync audio and cut silence.</div></li>
+    <li><span class="icon">☁️</span><div>Cloud tools make you upload gigabytes of raw footage — slow, and your files leave your machine.</div></li>
   </ul>
 </section>
 
@@ -378,12 +435,12 @@
 <section style="padding-top:0;">
   <div class="section-label">What it does</div>
   <h2>No editor required.<br>Everything automated.</h2>
-  <p class="section-sub">Forget Premiere and CapCut for this job. SyncCut Studio does it all — standalone, offline, on your Mac.</p>
+  <p class="section-sub">SyncCut Studio does one job and does it well — standalone, offline, on your Mac.</p>
   <div class="features-grid">
     <div class="feature-card">
       <div class="icon">🎯</div>
       <h3>Auto Sync</h3>
-      <p>Cross-correlation algorithm finds the exact offset between your iPhone video and Shure audio — no manual clapping needed.</p>
+      <p>Automatically finds the exact timing offset between your camera video and external mic audio. No clapping, no manual alignment.</p>
     </div>
     <div class="feature-card">
       <div class="icon">🔇</div>
@@ -398,17 +455,17 @@
     <div class="feature-card">
       <div class="icon">▶️</div>
       <h3>Live Preview</h3>
-      <p>Preview the edited video with silences skipped in real-time — before you commit to a full export.</p>
+      <p>Preview the final result with silences skipped in real-time — before committing to a full export.</p>
     </div>
     <div class="feature-card">
       <div class="icon">🎚</div>
       <h3>Audio Normalization</h3>
-      <p>Shure audio is normalized to −14 LUFS (YouTube standard) automatically on every export.</p>
+      <p>External mic audio is normalized to −14 LUFS (YouTube standard) automatically on every export.</p>
     </div>
     <div class="feature-card">
       <div class="icon">⚡️</div>
       <h3>Fast Export</h3>
-      <p>Default "Copy" mode skips re-encoding — your original 1080p iPhone quality is preserved at maximum speed.</p>
+      <p>Default "Copy" mode skips re-encoding — original video quality is preserved at maximum speed.</p>
     </div>
   </div>
 </section>
@@ -422,7 +479,7 @@
       <div class="step-num">1</div>
       <div class="step-content">
         <h3>Drop your files</h3>
-        <p>Drag-and-drop your iPhone .MOV and Shure .WAV onto the app. Waveforms appear instantly.</p>
+        <p>Drag-and-drop your camera video and external mic audio onto the app. Waveforms appear instantly.</p>
       </div>
     </div>
     <div class="step">
@@ -436,22 +493,76 @@
       <div class="step-num">3</div>
       <div class="step-content">
         <h3>Detect Silence</h3>
-        <p>Click "Detect Silence" to mark all pauses on the timeline. Adjust threshold to taste.</p>
+        <p>Click "Detect Silence" to mark all pauses on the timeline. Adjust the threshold to your preference.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-content">
         <h3>Preview</h3>
-        <p>Watch the result with silences skipped live. Toggle individual segments if something looks off.</p>
+        <p>Watch the result live with silences skipped. Toggle individual segments if anything looks off.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-content">
         <h3>Export</h3>
-        <p>Hit export. Get a clean MP4 with synced Shure audio, all silences removed, normalized to YouTube spec.</p>
+        <p>Hit export. Get a clean MP4 with synced external audio, all silences removed, normalized to YouTube spec.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR / NOT FOR -->
+<section style="padding-top:0;">
+  <div class="section-label">Audience</div>
+  <h2>Right tool, right person.</h2>
+  <p class="section-sub" style="margin-bottom:32px;">SyncCut Studio solves one specific problem really well.</p>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <h3>✅ Who Is This For</h3>
+      <ul class="for-list">
+        <li>YouTubers who record with an external microphone</li>
+        <li>Online teachers and course creators</li>
+        <li>Coaches and consultants who talk to camera</li>
+        <li>Podcasters who record video and external audio</li>
+        <li>Creators who hate repetitive editing tasks</li>
+        <li>Anyone who records video and audio separately</li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <h3>❌ Who This Is Not For</h3>
+      <ul class="not-for-list">
+        <li>Not a full video editor</li>
+        <li>Not for advanced cinematic editing</li>
+        <li>Does not do color grading, effects, captions, or transitions</li>
+        <li>Not a complete replacement for Premiere or CapCut</li>
+        <li>Built specifically to sync audio and cut silences — nothing more</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT BY A CREATOR -->
+<section style="padding-top:0;">
+  <div class="section-label">Built by a Creator, for Creators</div>
+  <h2>A tool born from a real problem.</h2>
+  <div class="trust-card">
+    <p>"I built SyncCut Studio because I was tired of wasting time syncing my external mic audio and manually cutting every silence in each video I made. No existing tool did just this one job — simply and offline. So I built it myself."</p>
+    <p>"This tool solves exactly that repetitive task — so you can focus on creating, not editing."</p>
+    <div class="author">— Marcus, creator of SyncCut Studio</div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section style="padding-top:0;">
+  <div class="section-label">Guarantee</div>
+  <h2>Zero risk.</h2>
+  <div class="guarantee-card">
+    <div class="g-icon">🛡️</div>
+    <div>
+      <h3>7-Day Setup Guarantee</h3>
+      <p>If SyncCut Studio doesn't work for your workflow, reach out within 7 days and I'll personally help you set it up — or give you your money back. No questions asked.</p>
     </div>
   </div>
 </section>
@@ -462,11 +573,11 @@
   <h2>What you need</h2>
   <ul class="req-list">
     <li>macOS 12 Monterey or later</li>
-    <li>iPhone video (.MOV)</li>
+    <li>Camera video file (.MOV or .MP4)</li>
     <li>External microphone audio (.WAV)</li>
-    <li>2 free tools pre-installed (step-by-step guide included)</li>
+    <li>2 free tools (setup guide included)</li>
   </ul>
-  <p style="color:var(--muted);font-size:0.875rem;margin-top:16px;">⚙️ Setup takes about 5 minutes. A detailed installation guide comes with your purchase — no technical experience needed.</p>
+  <p style="color:var(--muted);font-size:0.875rem;margin-top:16px;">⚙️ Simple installation guide included. Takes about 5 minutes. No technical experience needed.</p>
 </section>
 
 <!-- PRICING -->
@@ -476,27 +587,20 @@
   <div class="pricing-card">
     <div>macOS App — Lifetime License</div>
     <div class="price"><sup>$</sup>19</div>
-    <div class="price-desc">One-time payment. No subscription ever.</div>
+    <div class="price-desc">One-time payment. No subscription. Ever.</div>
     <ul class="pricing-features">
       <li>Full macOS desktop app (.app)</li>
-      <li>Auto sync iPhone + Shure mic</li>
+      <li>Auto-sync camera video + external mic audio</li>
       <li>Automatic silence detection & cutting</li>
       <li>Visual timeline editor</li>
       <li>Live preview before export</li>
       <li>Audio normalization to −14 LUFS</li>
       <li>Works 100% offline — no cloud</li>
+      <li>Simple setup guide included</li>
       <li>All future updates included</li>
+      <li>7-day setup guarantee</li>
     </ul>
-
-    <!-- =====================================================
-         PAYPAL BUTTON — Replace the placeholder below.
-         Steps:
-         1. Log in to paypal.com/buttons
-         2. Create a "Buy Now" button for $19 USD
-         3. Paste the generated <form> code here
-         ===================================================== -->
     <div class="paypal-wrap">
-      <!-- PASTE YOUR PAYPAL BUTTON CODE HERE -->
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <input type="hidden" name="cmd" value="_xclick">
         <input type="hidden" name="business" value="danieltinat@gmail.com">
@@ -504,20 +608,19 @@
         <input type="hidden" name="amount" value="19.00">
         <input type="hidden" name="currency_code" value="USD">
         <input type="hidden" name="no_shipping" value="1">
-        <input type="submit" value="Buy Now — $19" style="
+        <input type="submit" value="Get SyncCut Studio — Save Hours Editing" style="
           background: #0070ba;
           color: #fff;
           border: none;
-          padding: 16px 40px;
+          padding: 16px 32px;
           border-radius: 10px;
-          font-size: 1.05rem;
+          font-size: 1rem;
           font-weight: 700;
           cursor: pointer;
           width: 100%;
           transition: background 0.2s;
         " onmouseover="this.style.background='#005ea6'" onmouseout="this.style.background='#0070ba'">
       </form>
-      <!-- END PAYPAL BUTTON -->
       <span class="paypal-secure">🔒 Secure checkout via PayPal</span>
     </div>
   </div>
@@ -529,19 +632,35 @@
   <h2>Questions</h2>
   <div class="faq-list">
     <div class="faq-item">
-      <h3>Is setup difficult? Do I need to be technical?</h3>
-      <p>Not at all. Setup takes about 5 minutes. You install two free tools (Python and FFmpeg) using simple copy-paste commands — a step-by-step guide is included with your purchase. If you can follow a recipe, you can set this up.</p>
+      <h3>Does this replace Premiere or CapCut?</h3>
+      <p>No. SyncCut Studio is not a full video editor. It was built for one specific job: sync your external audio with your camera footage and remove silences automatically. For everything else, you still use your editor of choice.</p>
     </div>
     <div class="faq-item">
-      <h3>Does it work with any mic, or only Shure?</h3>
-      <p>It works with any external audio file (.WAV or similar). It was built and tested with Shure mics, so the defaults are tuned for that setup.</p>
+      <h3>Is this a subscription?</h3>
+      <p>No. $19 once, yours forever. All future updates are included.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do I need to be technical to use it?</h3>
+      <p>There's a simple one-time setup (about 5 minutes). A step-by-step installation guide is included with your purchase. If you can follow instructions, you can set this up.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What type of creator is this for?</h3>
+      <p>For anyone who records camera video and external microphone audio separately and wants to save time before editing or publishing — YouTubers, coaches, teachers, podcasters, and content creators.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What operating system does it support?</h3>
+      <p>Currently macOS only (macOS 12 Monterey or later). Windows support is not available at this time.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does it work with any microphone, or only Shure?</h3>
+      <p>It works with any external microphone audio file (.WAV or similar). It was optimized for Shure mics, but any external mic audio works.</p>
     </div>
     <div class="faq-item">
       <h3>Does my footage leave my computer?</h3>
       <p>Never. SyncCut Studio runs 100% locally. No uploads, no accounts, no servers.</p>
     </div>
     <div class="faq-item">
-      <h3>What happens if Auto Sync returns a wrong offset?</h3>
+      <h3>What if Auto Sync gets the offset wrong?</h3>
       <p>There's a ±5000 ms fine-tune slider so you can correct it manually before preview and export.</p>
     </div>
     <div class="faq-item">
@@ -549,21 +668,17 @@
       <p>MP4 by default (H.264 or H.265). "Copy mode" skips re-encoding to preserve original quality at maximum speed. MOV is also supported.</p>
     </div>
     <div class="faq-item">
-      <h3>Is this a subscription?</h3>
-      <p>No. $19 once, yours forever. All future updates are included.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What do I get after purchase?</h3>
-      <p>You'll receive a download link with the .app file and setup instructions via email through PayPal.</p>
+      <h3>What do I receive after purchase?</h3>
+      <p>You'll receive a download link with the .app file and the setup guide via email through PayPal.</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER CTA -->
 <section style="text-align:center; padding-bottom:60px;">
-  <h2 style="margin-bottom:16px;">Ready to edit faster?</h2>
-  <p style="color:var(--muted);margin-bottom:32px;">Join YouTube creators who ship videos without the manual grind.</p>
-  <a href="#pricing" class="btn-primary">Get SyncCut Studio — $19</a>
+  <h2 style="margin-bottom:16px;">Stop wasting time on repetitive tasks.</h2>
+  <p style="color:var(--muted);margin-bottom:32px;">Sync your audio, cut your silences, and get back to creating.</p>
+  <a href="#pricing" class="btn-primary">Get SyncCut Studio — $19 one-time</a>
 </section>
 
 <!-- FOOTER -->
